@@ -1,0 +1,49 @@
+<html>
+
+<head>
+</head>
+
+<body>
+   <button id="btn">Click me</button>
+   <h1>Hello world</h1>
+
+   <script src="jquery-3.7.1.min.js">   </script>
+   
+   <!-- Event binding -->
+   <script type="text/javascript">
+      //execute a function when the document is fully loaded
+      $(document).ready(function () {
+         console.log('document is fully loaded')   
+      });
+
+      
+      $('#btn').click(function(){
+        $(this).hide();
+      })
+
+      $('#btn').mouseenter(function () { 
+         $('h1').html('You enter me');
+      });
+   
+      $('#btn').mouseleave(function () { 
+         $('h1').html('You leave me');
+      });
+
+      $('h1').mousedown(function () { 
+         $('h1').html('You click me');
+      });
+
+      $('h1').on({
+      mouseenter: function(){
+         $(this).css("background-color", "lightgray");
+      },
+      mouseleave: function(){
+         $(this).css("background-color", "lightblue");
+      },
+      click: function(){
+         $(this).css("background-color", "yellow");
+      }
+      });
+   </script>
+</body>
+</html>
