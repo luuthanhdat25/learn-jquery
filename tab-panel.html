@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .tab-panels {
+            width: 80%;
+            margin: 20px auto;
+        }
+    
+        .tabs {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+    
+        .tabs li {
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            margin-right: 5px;
+            transition: background-color 0.3s ease;
+        }
+    
+        .tabs li:hover {
+            background-color: #ddd;
+        }
+    
+        .tabs li.active {
+            background-color: #ddd;
+        }
+    
+        .panel {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+    
+        .panel.active {
+            display: block;
+        }
+    
+        .special {
+            color: blue;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="tab-panels">
+        <ul class="tabs">
+            <li class="active" rel="panel1">panel1</li>
+            <li rel="panel2">panel2</li>
+            <li rel="panel3">panel3</li>
+            <li rel="panel4">panel4</li>
+        </ul>
+        <div id="panel1" class="panel active">
+            content1<br />
+            content1<br />
+            content1<br />
+            content1<br />
+            content1<br />
+        </div>
+        <div id="panel2" class="panel">
+            content2<br />
+            content2<br />
+            content2<br />
+            content2<br />
+            content2<br />
+        </div>
+        <div id="panel3" class="panel">
+            content3<br />
+            content3<br />
+            content3<br />
+            content3<br />
+            content3<br />
+        </div>
+        <div id="panel4" class="panel">
+            content4<br />
+            content4<br />
+            content4<br />
+            content4<br />
+            content4<br />
+        </div>
+    </div>
+
+    <div class="tab-panels">
+        <ul class="tabs">
+            <li class="active" rel="panel1">panel1</li>
+            <li rel="panel2">panel2</li>
+            <li rel="panel3">panel3</li>
+            <li rel="panel4">panel4</li>
+        </ul>
+        <div id="panel1" class="panel active">
+            content1<br />
+            content1<br />
+            content1<br />
+            content1<br />
+            content1<br />
+        </div>
+        <div id="panel2" class="panel">
+            content2<br />
+            content2<br />
+            content2<br />
+            content2<br />
+            content2<br />
+        </div>
+        <div id="panel3" class="panel">
+            content3<br />
+            content3<br />
+            content3<br />
+            content3<br />
+            content3<br />
+        </div>
+        <div id="panel4" class="panel">
+            content4<br />
+            content4<br />
+            content4<br />
+            content4<br />
+            content4<br />
+        </div>
+    </div>
+    <script src="jquery-3.7.1.min.js">   </script>
+
+    <script>
+        $('.tab-panels .tabs li').on('click', function () {
+            var $currentPanel = $(this).closest('.tab-panels')
+            
+            $currentPanel.find('.tabs li.active').removeClass('active')
+            $(this).addClass('active')
+            
+            var panelToShow = $(this).attr('rel')
+            $currentPanel.find(".panel.active").slideUp(300, showNextPanel)
+
+            function showNextPanel(){
+                $(this).removeClass('active')
+                $currentPanel.find("#" + panelToShow).slideDown(300, function(){
+                    $(this).addClass('active')
+                })
+            }
+        });
+    </script>
+</body>
+
+</html>
