@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    #slider {
+      width: 720px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    #slider .sliderContainer {
+      display: block;
+      width: 6000px;
+      height: 400px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #slider .slide {
+      float: left;
+      list-style-type: none;
+      width: 720px;
+      height: 400px;
+    }
+
+    #slider .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="text-muted">jQuery Basic Slider</h1>
+    </div>
+    <div id="slider">
+      <ul class="sliderContainer">
+        <li class="slide"><img src="images/image-1.jpg" alt="Slide 1" /></li>
+        <li class="slide"><img src="images/image-2.jpg" alt="Slide 1" /></li>
+        <li class="slide"><img src="images/image-3.jpg" alt="Slide 1" /></li>
+        <li class="slide"><img src="images/image-1.jpg" alt="Slide 1" /></li>
+      </ul>
+    </div>
+    <button id="stopInterval">Stop Interval</button>
+  </div>
+
+  <script src="jquery-3.7.1.min.js">   </script>
+    
+  <script>
+    //setInterval
+      //animate margin-left
+      //if last slide, go to position 1
+
+    //listen for mouseenter and pause
+    //resume on mouse leave
+
+    //Configuration
+    var width = 720
+    var timeSlideInterval = 2000
+    var timeSlideAnimation = 2000
+    var currentSlide = 1
+
+    //cache Dom element
+    var $slider = $('#slider')
+    var $sliderContainer = $slider.find('.sliderContainer')
+    var $sliders = $sliderContainer.find('.slide')
+
+    var interval; 
+
+    function playInterval(){
+        interval = setInterval(function(){
+          $sliderContainer.animate({'margin-left': '-=' + width}, timeSlideAnimation, function(){
+            currentSlide++
+            if(currentSlide === $sliders.length){
+              currentSlide = 1
+              $sliderContainer.css('margin-left', 0)
+            }
+          })
+        }, timeSlideInterval)
+    }
+
+    function stopInterval(){
+        clearInterval(interval)
+    }
+
+    playInterval()
+
+    $slider.on('mouseenter', stopInterval).on('mouseleave', playInterval);
+  </script>
+</body>
+
+</html>
